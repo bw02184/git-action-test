@@ -36,8 +36,8 @@ jobs:
           mysql --version
           sudo apt-get install -y mysql-client
           sudo service mysql start
-          mysql -uroot -proot -e "CREATE DATABASE Member"
-          mysql -uroot -proot -e "SHOW DATABASES"
+          mysql -uroot -ptest -e "CREATE DATABASE member"
+          mysql -uroot -ptest -e "SHOW DATABASES"
 
       - name: Run test
         env:
@@ -48,6 +48,8 @@ jobs:
           DB_PASSWORD: test
         run: |
           sudo service mysql restart
+          echo $DB_HOST 
+          echo $DB_PORT
           mysql --host $DB_HOST --port $DB_PORT -uroot -ptest -e 'CREATE SCHEMA `Member` CHARACTER SET utf8 COLLATE utf8_general_ci';  
 
       # Gradle test를 실행한다
