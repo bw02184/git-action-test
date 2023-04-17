@@ -35,12 +35,12 @@ jobs:
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: ${{ job.services.mysql.ports['3306'] }}
-          DB_NAME: test
+          DB_NAME: member
           DB_USER: root
           DB_PASSWORD: test
         run: |
           sudo service mysql restart
-          mysql --host $DB_HOST --port $DB_PORT -uroot -ptest -e 'CREATE SCHEMA `test_test` CHARACTER SET utf8 COLLATE utf8_general_ci';  
+          mysql --host $DB_HOST --port $DB_PORT -uroot -ptest -e 'CREATE SCHEMA `Member` CHARACTER SET utf8 COLLATE utf8_general_ci';  
 
       # Gradle test를 실행한다
       - name: Test with Gradle
