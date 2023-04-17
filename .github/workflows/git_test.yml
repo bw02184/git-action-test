@@ -7,6 +7,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: test
+        ports:
+          - 3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
       - uses: actions/checkout@v2
 
@@ -18,6 +30,17 @@ jobs:
       # Gradle wrapper 파일 실행 권한주기
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Run test
+        env:
+          DB_HOST: 127.0.0.1
+          DB_PORT: ${{ job.services.mysql.ports['3306'] }}
+          DB_NAME: test
+          DB_USER: root
+          DB_PASSWORD: test
+        run: |
+          sudo service mysql restart
+          mysql --host $DB_HOST --port $DB_PORT -uroot -ptest -e 'CREATE SCHEMA `test_test` CHARACTER SET utf8 COLLATE utf8_general_ci';  
 
       # Gradle test를 실행한다
       - name: Test with Gradle
