@@ -40,7 +40,7 @@ jobs:
           DB_PASSWORD: test
         run: |
           sudo service mysql restart
-          mysql --host $DB_HOST --port $DB_PORT -uroot -ptest -e 'CREATE SCHEMA `Member` CHARACTER SET utf8 COLLATE utf8_general_ci';  
+          mysql --host 127.0.0.1 --port 3306 -uroot -ptest -e 'CREATE SCHEMA `Member` CHARACTER SET utf8 COLLATE utf8_general_ci';  
 
       # Gradle test를 실행한다
       - name: Test with Gradle
