@@ -36,8 +36,8 @@ jobs:
           mysql --version
           sudo apt-get install -y mysql-client
           sudo service mysql start
-          mysql -uroot -ptest -e "CREATE DATABASE member"
-          mysql -uroot -ptest -e "SHOW DATABASES"
+          mysql -uroot -proot -e "CREATE DATABASE member"
+          mysql -uroot -proot -e "SHOW DATABASES"
 
       - name: Run test
         env:
