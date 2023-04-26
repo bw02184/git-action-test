@@ -1,9 +1,5 @@
 name: PR Test
 
-spring:
-  profiles:
-    active: test
-
 on:
   pull_request:
     branches: [ master ] # master branch에 PR을 보낼 때 실행
