@@ -26,15 +26,15 @@ jobs:
         with:
           java-version: 11
 
-      - name: Cache Gradle
-      - uses: actions/cache@v2
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
         with:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-      
+            ${{ runner.os }}-gradle-   
 
       # Gradle wrapper 파일 실행 권한주기
       - name: Grant execute permission for gradlew
