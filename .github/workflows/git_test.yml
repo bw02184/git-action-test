@@ -26,6 +26,11 @@ jobs:
         with:
           java-version: 11
           distribution: 'temurin'
+
+      # Gradle wrapper 파일 실행 권한주기
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       # Gradle Cache 추가
       - name: Cache Gradle packages
         uses: actions/cache@v3
@@ -36,10 +41,6 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-   
-
-      # Gradle wrapper 파일 실행 권한주기
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
 
       - name: Run test
         env:
@@ -58,3 +59,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: test
+          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
