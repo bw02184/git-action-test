@@ -33,6 +33,7 @@ jobs:
 
       # Gradle Cache 추가
       - name: Cache Gradle packages
+        id: cache-npm
         uses: actions/cache@v3
         with:
           path: |
@@ -40,7 +41,12 @@ jobs:
             ~/.gradle/wrapper
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
-            ${{ runner.os }}-gradle-   
+            ${{ runner.os }}-gradle-
+
+      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
 
       - name: Run test
         env:
