@@ -2,7 +2,7 @@ name: PR Test
 
 on:
   push:
-    branches: [ features ]
+    branches: [ features/* ]
 
 jobs:
   test:
