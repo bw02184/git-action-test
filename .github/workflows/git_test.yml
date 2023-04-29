@@ -1,8 +1,8 @@
 name: PR Test
 
 on:
-  pull_request:
-    branches: [ master ] # master branch에 PR을 보낼 때 실행
+  push:
+    branches: [master, features/*]
 
 jobs:
   test:
@@ -65,5 +65,18 @@ jobs:
       - name: Setup and execute Gradle 'test' task
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: --info test
+          arguments:  build jacocoTestReport
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
+
+
+      - name: Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./build/reports/jacoco/test/jacocoTestReport.html
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: ${{ always() }}
+        with:
+          files: ./build/test-results/**/*.xml
