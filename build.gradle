@@ -31,10 +31,9 @@ tasks.named('test') {
 }
 jacocoTestReport {
 	executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
-
 	reports {
 		html.enabled true
-		xml.enabled false
+		xml.enabled true
 		csv.enabled false
 	}
 }
