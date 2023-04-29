@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.10'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'jacoco'
 }
 
 group = 'hello'
@@ -21,7 +22,19 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java:8.0.30'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
-
+jacoco {
+	toolVersion = "0.8.8"
+}
 tasks.named('test') {
 	useJUnitPlatform()
+	finalizedBy jacocoTestReport
+}
+jacocoTestReport {
+	executionData(fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec"))
+
+	reports {
+		html.enabled true
+		xml.enabled false
+		csv.enabled false
+	}
 }
