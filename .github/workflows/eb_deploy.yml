@@ -71,4 +71,4 @@ jobs:
           environment_name: GitHubActionTest-env
           version_label: ${{github.SHA}}
           region: ap-northeast-2
-          deployment_package: hello-spring-0.0.1-SNAPSHOT.jar
+          deployment_package: build/libs/hello-spring-0.0.1-SNAPSHOT.jar
