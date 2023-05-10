@@ -39,7 +39,7 @@ jobs:
         continue-on-error: true
         run: npm list
 
-      - name: Setup and execute Gradle 'test' task
+      - name: Setup and execute Gradle 'build' task
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
@@ -50,7 +50,7 @@ jobs:
         with:
           name: artifact
           path: build/libs/hello-spring-0.0.1-SNAPSHOT.jar
-          run: tree
+
   deploy:
     needs: build
     name: Deploy
