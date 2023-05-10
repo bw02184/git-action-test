@@ -49,7 +49,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: artifact
-          path: build/libs/*.jar
+          path: build/libs/hello-spring-0.0.1-SNAPSHOT.jar
   deploy:
     needs: build
     name: Deploy
@@ -71,4 +71,4 @@ jobs:
           environment_name: GitHubActionTest-env
           version_label: ${{github.SHA}}
           region: ap-northeast-2
-          deployment_package: tweet_scheduler-0.0.1-SNAPSHOT.jar
+          deployment_package: hello-spring-0.0.1-SNAPSHOT.jar
