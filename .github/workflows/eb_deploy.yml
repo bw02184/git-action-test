@@ -42,7 +42,7 @@ jobs:
       - name: Setup and execute Gradle 'build' task
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build
+          arguments: clean build
           cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
       - name: Upload JAR
@@ -62,7 +62,7 @@ jobs:
           name: artifact
       #Deploy the artifact (JAR) into AWS Beanstalk
       - name: Deploy to EB
-        uses: einaregilsson/beanstalk-deploy@v18
+        uses: einaregilsson/beanstalk-deploy@v21
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
