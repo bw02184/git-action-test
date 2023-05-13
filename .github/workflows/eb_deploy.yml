@@ -41,15 +41,15 @@ jobs:
 
       - name: Get Github action IP
         id: ip
-        uses: haythem/public-ip@v1.2
+        uses: haythem/public-ip@v1.3
 
       - name: Setting environment variables
         run: |
           echo "AWS_DEFAULT_REGION=ap-northeast-2" >> $GITHUB_ENV
-          echo "AWS_SG_NAME=launch-wizard-2" >> $GITHUB_ENV
+          echo "AWS_SG_NAME=daemo_Security" >> $GITHUB_ENV
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -64,7 +64,7 @@ jobs:
           AWS_DEFAULT_REGION: ap-northeast-2
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
