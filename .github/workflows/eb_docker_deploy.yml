@@ -71,7 +71,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: eb_docker_deploy
-          environment_name: eb_docker_deploy-env
+          environment_name: Ebdockerdeploy-env
           version_label: "github-action--${{ steps.format-time.outputs.replaced }}"
           region: ap-northeast-2
           deployment_package: Dockerrun.aws.json
