@@ -16,31 +16,6 @@ jobs:
           java-version: 11
           distribution: 'temurin'
           cache: 'gradle'
-#
-#        ### Gradle ###
-#      - name: Grant execute permission for gradlew
-#        run: chmod +x gradlew
-#
-#      - name: Cache Gradle packages
-#        id: cache-npm
-#        uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#          restore-keys: |
-#            ${{ runner.os }}-gradle-
-#      - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-#        name: List the state of node modules
-#        continue-on-error: true
-#        run: npm list
-#
-#      - name: Setup and execute Gradle 'build' task
-#        uses: gradle/gradle-build-action@v2
-#        with:
-#          arguments: clean build
-#          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/develop' }}
 
       - name: Docker build
         run: |
@@ -48,7 +23,6 @@ jobs:
           docker build -t spring-boot-cicd .
           docker tag spring-boot-cicd shinwonsub/spring-boot-cicd:latest
           docker push shinwonsub/spring-boot-cicd:latest
-
 
       - name: Get timestamp
         uses: gerred/actions/current-time@master
